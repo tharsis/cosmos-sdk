@@ -40,7 +40,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 ### Improvements
 
 * [\#10486](https://github.com/cosmos/cosmos-sdk/pull/10486) store/cachekv's `Store.Write` conservatively looks up keys, but also uses the [map clearing idiom](https://bencher.orijtech.com/perfclinic/mapclearing/) to reduce the RAM usage, CPU time usage, and garbage collection pressure from clearing maps, instead of allocating new maps.
-* [\#10393](https://github.com/cosmos/cosmos-sdk/pull/10393) Add `HasSupply` method to bank keeper to ensure that input denom actually exists on chain.
+* [\#10393](https://github.com/cosmos/cosmos-sdk/pull/"10393") Add `HasSupply` method to bank keeper to ensure that input denom actually exists on chain.
 
 ### Bug Fixes
 
