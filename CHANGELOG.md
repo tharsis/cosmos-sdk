@@ -37,13 +37,42 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 ## [Unreleased]
 
+
+
 ### Improvements
 
 * [\#10077](https://github.com/cosmos/cosmos-sdk/pull/10077),[\#10334](https://github.com/cosmos/cosmos-sdk/pull/10334) Remove telemetry on `GasKV` and `CacheKV` store operations, significantly improving their performance.
 * [\#10486](https://github.com/cosmos/cosmos-sdk/pull/10486) store/cachekv's `Store.Write` conservatively looks up keys, but also uses the [map clearing idiom](https://bencher.orijtech.com/perfclinic/mapclearing/) to reduce the RAM usage, CPU time usage, and garbage collection pressure from clearing maps, instead of allocating new maps.
 * [\#10393](https://github.com/cosmos/cosmos-sdk/pull/"10393") Add `HasSupply` method to bank keeper to ensure that input denom actually exists on chain.
+* (std/codec) [/#10595](https://github.com/cosmos/cosmos-sdk/pull/10595) Add evidence to std/codec to be able to decode evidence in client interactions. 
+* [#10725](https://github.com/cosmos/cosmos-sdk/pull/10725) populate `ctx.ConsensusParams` for begin/end blockers.
+* [#10823](https://github.com/cosmos/cosmos-sdk/pull/10823) updated ambiguous cli description for creating feegrant.
+
+## [v0.44.5](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.44.5) - 2021-12-02
+
+### Improvements
+
+* (baseapp) [\#10631](https://github.com/cosmos/cosmos-sdk/pull/10631)  Emit ante events even for the failed txs. 
+* (store) [\#10741](https://github.com/cosmos/cosmos-sdk/pull/10741) Significantly speedup iterator creation after delete heavy workloads. Significantly improves IBC migration times.
 
 ### Bug Fixes
+
+* [\#10648](https://github.com/cosmos/cosmos-sdk/pull/10648) Upgrade IAVL to 0.17.3 to solve race condition bug in IAVL.
+
+## [v0.44.4](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.44.4) - 2021-11-25
+
+### Improvements
+
+* (types) [\#10630](https://github.com/cosmos/cosmos-sdk/pull/10630) Add an `Events` field to the `TxResponse` type that captures _all_ events emitted by a transaction, unlike `Logs` which only contains events emitted during message execution.
+* (x/upgrade) [\#10532](https://github.com/cosmos/cosmos-sdk/pull/10532)  Add `keeper.DumpUpgradeInfoWithInfoToDisk` to include `Plan.Info` in the upgrade-info file.
+* (store) [\#10544](https://github.com/cosmos/cosmos-sdk/pull/10544) Use the new IAVL iterator structure which significantly improves iterator performance.
+
+### Bug Fixes
+
+* [\#10414](https://github.com/cosmos/cosmos-sdk/pull/10414) Use `sdk.GetConfig().GetFullBIP44Path()` instead `sdk.FullFundraiserPath` to generate key
+* (bank) [\#10394](https://github.com/cosmos/cosmos-sdk/pull/10394) Fix: query account balance by ibc denom.
+* [\10608](https://github.com/cosmos/cosmos-sdk/pull/10608) Change the order of module migration by pushing x/auth to the end. Auth module depends on other modules and should be run last. We have updated the documentation to provide more details how to change module migration order. This is technically a breaking change, but only impacts updates between the upgrades with version change, hence migrating from the previous patch release doesn't cause new migration and doesn't break the state.
+* [\#10674](https://github.com/cosmos/cosmos-sdk/pull/10674) Fix issue with `Error.Wrap` and `Error.Wrapf` usage with `errors.Is`.
 
 ## [v0.44.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.44.3) - 2021-10-21
 
